@@ -128,7 +128,7 @@ os.environ["TF_CONFIG"] = json.dumps({
 We provide a script for this: [demo_local_runner.py](./demo_local_runner.py). To run batch training, simply do
 
 ```bash
-bazel run --cxxopt='-Wno-error=stringop-truncation' --jobs=4 --copt="-O2" --local_ram_resources=8192  --copt="-march=native" //markdown/demo:demo_local_runner -- --training_type=batch
+bazel run --spawn_strategy=standalone --jobs=12 --copt="-O2" --local_ram_resources=8192  --copt="-march=native" //monolith/native_training:demo --output_filter=IGNORE_LOGS --experimental_repo_remote_exec --verbose_failures --sandbox_debug -- --training_type=stream --cxxopt=-std=c++14
 ```
 bazel build --jobs=4 //path/to:target
 
